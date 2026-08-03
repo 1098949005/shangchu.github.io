@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>登录 - 老板商厨管理后台</title>
+<link rel="stylesheet" href="common.css"></head>
+<body data-page="login" class="auth-body">
+
+
+<style>
+.auth-body { background:#0f172a; }
+.auth-page { display:flex; min-height:100vh; }
+.auth-aside { width:46%; background:linear-gradient(135deg,#1e3a8a 0%, #2563eb 100%); color:#fff; padding:48px 56px; display:flex; flex-direction:column; justify-content:space-between; }
+.auth-brand-top { display:flex; align-items:center; gap:12px; }
+.auth-logo { width:44px;height:44px;border-radius:10px;background:#fff;color:#2563eb;font-weight:700;font-size:22px;display:flex;align-items:center;justify-content:center; }
+.auth-brand-name { font-size:20px;font-weight:600; }
+.auth-aside-slogan h2 { font-size:30px;font-weight:700;margin:0 0 12px;line-height:1.3; }
+.auth-aside-slogan p { font-size:15px;opacity:.85;line-height:1.7;max-width:380px;margin:0; }
+.auth-aside-feats { list-style:none;padding:0;margin:32px 0; }
+.auth-aside-feats li { font-size:15px;opacity:.9;padding:10px 0 10px 28px;position:relative; }
+.auth-aside-feats li:before { content:"\2713"; position:absolute;left:0;top:10px;color:#93c5fd;font-weight:700; }
+.auth-aside-foot { font-size:13px;opacity:.6; }
+.auth-main { flex:1; background:#f3f4f6; display:flex;align-items:center;justify-content:center; padding:40px; }
+.auth-card { width:400px;max-width:100%;background:#fff;border-radius:14px;padding:40px 36px;box-shadow:0 10px 30px rgba(0,0,0,.08); }
+.auth-head { text-align:center;margin-bottom:28px; }
+.auth-head .auth-logo { margin:0 auto 14px; }
+.auth-title { font-size:24px;font-weight:700;color:#111827;margin:0 0 6px; }
+.auth-sub { font-size:14px;color:#6b7280;margin:0; }
+.auth-field { margin-bottom:18px; }
+.auth-field label { display:block;font-size:13px;color:#374151;margin-bottom:7px;font-weight:500; }
+.auth-field input { width:100%;border:1px solid #d1d5db;border-radius:8px;padding:11px 12px;font-size:14px;box-sizing:border-box; }
+.auth-field input:focus { outline:none;border-color:#2563eb; }
+.auth-code-wrap { display:flex;gap:10px; }
+.auth-code-wrap input { flex:1;min-width:0; }
+.auth-code-btn { white-space:nowrap; }
+.auth-row { display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;font-size:13px; }
+.auth-check { display:flex;align-items:center;gap:6px;color:#374151;cursor:pointer; }
+.auth-submit { width:100%;padding:12px;font-size:15px;border-radius:8px; }
+.auth-submit-ghost { width:100%;padding:12px;font-size:15px;border-radius:8px;background:#fff;border:1px solid #d1d5db;color:#374151;cursor:pointer;margin-top:4px; }
+.auth-divider { text-align:center;color:#9ca3af;font-size:13px;margin:16px 0;position:relative; }
+.auth-divider:before, .auth-divider:after { content:"";position:absolute;top:50%;width:38%;height:1px;background:#e5e7eb; }
+.auth-divider:before { left:0; } .auth-divider:after { right:0; }
+.auth-tip { font-size:12px;color:#9ca3af;text-align:center;margin-top:18px; }
+.auth-agree { margin-bottom:18px;font-size:13px; }
+.auth-login-link { text-align:center;font-size:14px;color:#6b7280;margin-top:16px; }
+@media (max-width:860px){ .auth-aside{display:none;} }
+</style>
+
+<div class="auth-page">
+  <div class="auth-aside">
+  <div class="auth-brand-top">
+    <div class="auth-logo">厨</div>
+    <div class="auth-brand-name">老板商厨管理后台</div>
+  </div>
+  <div class="auth-aside-slogan">
+    <h2>智能商厨 · 一站管控</h2>
+    <p>连接设备、菜谱与数据，让每一餐烹饪更高效、更稳定。</p>
+  </div>
+  <ul class="auth-aside-feats">
+    <li>设备运行实时监控</li>
+    <li>菜谱云端管理与下发</li>
+    <li>多门店数据报表分析</li>
+  </ul>
+  <div class="auth-aside-foot">© 2026 老板电器 · 商厨 IoT 平台</div>
+</div>
+  <div class="auth-main">
+    <div class="auth-card">
+      <div class="auth-head">
+        <div class="auth-logo">厨</div>
+        <h1 class="auth-title">欢迎登录</h1>
+        <p class="auth-sub">请输入您的账号信息以进入系统</p>
+      </div>
+      <form class="auth-form" onsubmit="event.preventDefault();window.location.href='index.html'">
+        <div class="auth-field">
+          <label>账号 / 手机号 <span style="color:#ef4444">*</span></label>
+          <input type="text" placeholder="请输入账号或手机号" value="admin">
+        </div>
+        <div class="auth-field">
+          <label>密码 <span style="color:#ef4444">*</span></label>
+          <input type="password" placeholder="请输入密码" value="123456">
+        </div>
+        <div class="auth-row">
+          <label class="auth-check"><input type="checkbox" checked> 记住我</label>
+          <a class="text-link" href="login.html">忘记密码？</a>
+        </div>
+        <button type="submit" class="btn btn-primary auth-submit">登录</button>
+        <div class="auth-divider"><span>或</span></div>
+        <button type="button" class="btn auth-submit-ghost" onclick="window.location.href='register.html'">注册新账号</button>
+      </form>
+      <div class="auth-tip">演示原型：默认账号 admin，可直接点击登录进入后台</div>
+    </div>
+  </div>
+</div>
+
+<script src="common.js"></script>
+</body>
+</html>

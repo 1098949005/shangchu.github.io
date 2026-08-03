@@ -90,7 +90,8 @@
 <div class="breadcrumb"><span>数据</span><span>/</span><span>后厨报表</span><span>/</span><span>烹饪类</span><span>/</span><span>时段烹饪报表</span></div>
 <div class="report-card">
   <div class="tabs small"><button class="tab-btn active" data-tab="tab-store-time" data-tab-group="time-cooking">门店时段统计</button><button class="tab-btn " data-tab="tab-recipe-time" data-tab-group="time-cooking">菜谱时段统计</button><button class="tab-btn " data-tab="tab-device-time" data-tab-group="time-cooking">设备时段统计</button></div><div id="tab-store-time" class="tab-content active" data-tab-content data-tab-group="time-cooking" style="display:block">
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+
+<div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
   <div class="filter-bar" style="margin:0">
     <div class="filter-item"><label>起止时间</label><input type="text" value="2026-07-28 00:00" size="16"> 至 <input type="text" value="2026-07-29 00:00" size="16"></div>
   </div>
@@ -99,8 +100,35 @@
     <button class="btn btn-primary">查询</button><button class="btn">重置</button><button class="btn">导出</button>
   </div>
 </div>
-<div class="empty-report"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="1.5"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M8 14h.01M12 14h.01M16 14h.01"/></svg><br>暂无数据</div>
-</div><div id="tab-recipe-time" class="tab-content" data-tab-content data-tab-group="time-cooking" style="display:none"><div class="empty-report">按菜谱维度统计各时段烹饪分布（暂无数据）</div></div><div id="tab-device-time" class="tab-content" data-tab-content data-tab-group="time-cooking" style="display:none"><div class="empty-report">按设备维度统计各时段烹饪分布（暂无数据）</div></div>
+<div class="table-wrap"><table><thead><tr><th>统计时间</th><th>门店ID</th><th>门店名称</th><th>烹饪次数</th><th>烹饪量/kg</th><th>完成烹饪量/kg</th><th>烹饪份数</th><th>完成烹饪份数</th></tr></thead><tbody><tr><td>2026-07-28 00:00~01:00</td><td>873189575122931712</td><td>a123</td><td>12</td><td>8.50</td><td>8.20</td><td>15</td><td>14</td></tr><tr><td>2026-07-28 01:00~02:00</td><td>1165907044092956672</td><td>炒菜机体验活动</td><td>9</td><td>6.30</td><td>6.00</td><td>11</td><td>10</td></tr><tr><td>2026-07-28 02:00~03:00</td><td>873182220108877824</td><td>深圳总店</td><td>7</td><td>4.80</td><td>4.60</td><td>9</td><td>8</td></tr><tr><td>2026-07-28 03:00~04:00</td><td>873189575122931712</td><td>a123</td><td>5</td><td>3.20</td><td>3.00</td><td>6</td><td>6</td></tr><tr><td>2026-07-28 04:00~05:00</td><td>1165907044092956672</td><td>炒菜机体验活动</td><td>3</td><td>2.10</td><td>2.00</td><td>4</td><td>3</td></tr></tbody></table></div>
+<div class="pagination-bar"><span>共 182 条记录 第 1 / 5 页</span><div class="pages"><button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">3</button><button class="page-btn">4</button><button class="page-btn">5</button><button class="page-btn">&gt;</button></div><span>10 条/页</span></div>
+</div><div id="tab-recipe-time" class="tab-content" data-tab-content data-tab-group="time-cooking" style="display:none">
+
+<div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+  <div class="filter-bar" style="margin:0">
+    <div class="filter-item"><label>起止时间</label><input type="text" value="2026-07-28 00:00" size="16"> 至 <input type="text" value="2026-07-29 00:00" size="16"></div>
+  </div>
+  <div class="filter-actions">
+    <button class="btn btn-primary btn-sm">按小时统计</button><button class="btn btn-sm">按半小时统计</button>
+    <button class="btn btn-primary">查询</button><button class="btn">重置</button><button class="btn">导出</button>
+  </div>
+</div>
+<div class="table-wrap"><table><thead><tr><th>统计时间</th><th>菜谱名称</th><th>菜谱ID</th><th>菜谱规格</th><th>门店名称</th><th>适用设备</th><th>烹饪次数</th><th>烹饪量/kg</th><th>完成烹饪量/kg</th><th>烹饪份数</th><th>完成烹饪份数</th></tr></thead><tbody><tr><td>2026-07-28 00:00~01:00</td><td>红烧肉</td><td>4hoRuSHGk5pSGq9pg</td><td>1份(1kg)</td><td>小食店1232</td><td>G3标准版2.0</td><td>5</td><td>3.20</td><td>3.00</td><td>6</td><td>5</td></tr><tr><td>2026-07-28 00:00~01:00</td><td>小炒黄牛肉0.5kg</td><td>KW7Hfigrxh12ntZS</td><td>1份(0.5kg)</td><td>小食店1232</td><td>G5标准版1.5</td><td>4</td><td>2.10</td><td>2.00</td><td>5</td><td>4</td></tr><tr><td>2026-07-28 01:00~02:00</td><td>炒小白菜0.35kg</td><td>rKMyFXUHZxNIT7DIC</td><td>1份(0.35kg)</td><td>小食店1232</td><td>L4_V1.0</td><td>3</td><td>1.10</td><td>1.00</td><td>4</td><td>3</td></tr><tr><td>2026-07-28 02:00~03:00</td><td>红烧肉</td><td>4hoRuSHGk5pSGq9pg</td><td>1份(1kg)</td><td>深圳总店</td><td>G3标准版2.0</td><td>2</td><td>1.30</td><td>1.20</td><td>3</td><td>2</td></tr></tbody></table></div>
+<div class="pagination-bar"><span>共 156 条记录 第 1 / 5 页</span><div class="pages"><button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">3</button><button class="page-btn">4</button><button class="page-btn">5</button><button class="page-btn">&gt;</button></div><span>10 条/页</span></div>
+</div><div id="tab-device-time" class="tab-content" data-tab-content data-tab-group="time-cooking" style="display:none">
+
+<div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+  <div class="filter-bar" style="margin:0">
+    <div class="filter-item"><label>起止时间</label><input type="text" value="2026-07-28 00:00" size="16"> 至 <input type="text" value="2026-07-29 00:00" size="16"></div>
+  </div>
+  <div class="filter-actions">
+    <button class="btn btn-primary btn-sm">按小时统计</button><button class="btn btn-sm">按半小时统计</button>
+    <button class="btn btn-primary">查询</button><button class="btn">重置</button><button class="btn">导出</button>
+  </div>
+</div>
+<div class="table-wrap"><table><thead><tr><th>统计时间</th><th>产品类型</th><th>产品名称</th><th>设备CGID</th><th>门店名称</th><th>烹饪次数</th><th>烹饪量/kg</th><th>完成烹饪量/kg</th><th>烹饪份数</th><th>完成烹饪份数</th></tr></thead><tbody><tr><td>2026-07-28 00:00~01:00</td><td>G3标准板</td><td>G3标准板2.5</td><td>177450989305013084880000000000</td><td>a123</td><td>12</td><td>8.50</td><td>8.20</td><td>15</td><td>14</td></tr><tr><td>2026-07-28 00:00~01:00</td><td>RT系列</td><td>RT3标准版</td><td>178245456674812282670000000000</td><td>炒菜机体验活动</td><td>9</td><td>6.30</td><td>6.00</td><td>11</td><td>10</td></tr><tr><td>2026-07-28 01:00~02:00</td><td>G3标准板</td><td>G3标准板2.5</td><td>176912762458514839100000000000</td><td>深圳总店</td><td>7</td><td>4.80</td><td>4.60</td><td>9</td><td>8</td></tr><tr><td>2026-07-28 02:00~03:00</td><td>RT系列</td><td>RT3标准版</td><td>178245456674812282670000000000</td><td>炒菜机体验活动</td><td>5</td><td>3.20</td><td>3.00</td><td>6</td><td>6</td></tr></tbody></table></div>
+<div class="pagination-bar"><span>共 168 条记录 第 1 / 5 页</span><div class="pages"><button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">3</button><button class="page-btn">4</button><button class="page-btn">5</button><button class="page-btn">&gt;</button></div><span>10 条/页</span></div>
+</div>
 </div></div></div>
 </main>
 </div>
