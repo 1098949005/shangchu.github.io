@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>账号管理 - 老板商厨管理后台</title>
+<link rel="stylesheet" href="common.css"></head>
+<body data-page="system-account">
+<div class="app">
+<div class="header">
+  <div class="header-left">
+    <div class="logo">厨</div><div class="system-title">老板商厨管理后台</div>
+    <span class="header-org">查看下属单位 <select><option>全部单位</option><option>华东大区</option><option>华北大区</option></select></span>
+  </div>
+  <div class="header-right">
+    <span>菜谱计量单位 <select><option>公制</option><option>英制</option></select></span>
+    <span class="task-center-btn" data-open-task>任务中心</span>
+    <div class="user-menu" id="userMenu">
+      <div class="user-trigger" data-toggle-user-menu>
+        <div class="user-avatar">管</div>
+        <span class="user-name">管理员</span>
+        <span class="user-arrow">▼</span>
+      </div>
+      <div class="user-dropdown" id="userDropdown">
+        <div class="user-dropdown-header">
+          <div class="user-avatar">管</div>
+          <div>
+            <div class="user-dropdown-name">管理员</div>
+            <div class="user-dropdown-role">系统管理员</div>
+          </div>
+        </div>
+        <div class="user-dropdown-menu">
+          <a class="user-dropdown-item" data-open-modal="modal-change-password">修改密码</a>
+          <a class="user-dropdown-item danger" data-logout>退出登录</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="task-overlay" data-close-drawer></div>
+<div class="task-drawer drawer">
+  <div class="task-drawer-header"><span>任务中心</span><button class="btn btn-sm" data-close-drawer>关闭</button></div>
+  <div class="task-drawer-body">
+    <div class="tabs"><button class="tab-btn active" data-tab="tab-my-tasks" data-tab-group="task">我的任务</button><button class="tab-btn " data-tab="tab-my-exports" data-tab-group="task">我的导出</button></div>
+    <div id="tab-my-tasks" class="tab-content active" data-tab-content data-tab-group="task" style="display:block">
+<p class="recipe-meta" style="margin-bottom:12px">仅显示近 7 天任务</p>
+<div class="table-wrap"><table><thead><tr><th>任务名称</th><th>处理时间</th><th>进度</th><th>状态</th><th>操作</th></tr></thead><tbody>
+<tr><td>菜谱同步下发</td><td>2026-07-28 14:30</td><td><div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div> 80%</td><td><span class="badge badge-warning">进行中</span></td><td><a class="text-link">查看</a></td></tr>
+<tr><td>设备批量导出</td><td>2026-07-28 13:10</td><td><div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div> 100%</td><td><span class="badge badge-success">已完成</span></td><td><a class="text-link">查看</a></td></tr>
+<tr><td>门店数据汇总</td><td>2026-07-27 18:00</td><td><div class="progress-bar"><div class="progress-fill" style="width:45%"></div></div> 45%</td><td><span class="badge badge-warning">进行中</span></td><td><a class="text-link">查看</a></td></tr>
+</tbody></table></div>
+</div>
+    <div id="tab-my-exports" class="tab-content" data-tab-content data-tab-group="task" style="display:none">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><span class="recipe-meta">导出文件保留 30 天</span><button class="btn btn-sm">刷新</button></div>
+<div class="table-wrap"><table><thead><tr><th>文件名称</th><th>导出时间</th><th>导出进度</th><th>状态</th><th>操作</th></tr></thead><tbody>
+<tr><td>设备清单_20260728.xlsx</td><td>2026-07-28 10:00</td><td><div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div> 100%</td><td><span class="badge badge-success">可下载</span></td><td><a class="text-link">下载</a></td></tr>
+<tr><td>后厨报表_20260727.xlsx</td><td>2026-07-27 16:30</td><td><div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div> 100%</td><td><span class="badge badge-success">可下载</span></td><td><a class="text-link">下载</a></td></tr>
+<tr><td>菜谱汇总_20260725.xlsx</td><td>2026-07-25 09:15</td><td><div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div> 60%</td><td><span class="badge badge-warning">导出中</span></td><td><a class="text-link">下载</a></td></tr>
+</tbody></table></div>
+</div>
+  </div>
+</div>
+
+<div id="modal-change-password" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header"><span>修改密码</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body">
+<div class="form-group"><label>原密码</label><input type="password" placeholder="请输入原密码"></div>
+<div class="form-row"><div class="form-group"><label>新密码</label><input type="password" placeholder="请输入新密码"></div><div class="form-group"><label>确认新密码</label><input type="password" placeholder="请再次输入新密码"></div></div>
+</div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary">保存</button></div>
+  </div>
+</div>
+<div id="modal-logout" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header"><span>退出登录</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body"><p style="margin:0;color:#374151;font-size:14px">确定要退出当前登录账号吗？</p></div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary" style="background:#ef4444;border-color:#ef4444">确定退出</button></div>
+  </div>
+</div>
+
+<div class="body">
+<nav class="sidebar"><a href="index.html" data-page="home" class="">首页</a><details open><summary>设备<span class="arrow">▶</span></summary><a href="device-overview.html" data-page="device-overview" class="">设备总览</a><a href="device-cookers.html" data-page="device-cookers" class="">炒菜机管理</a><a href="device-others.html" data-page="device-others" class="">其他设备</a><a href="device-logs.html" data-page="device-logs" class="">设备日志</a><a href="device-auth.html" data-page="device-auth" class="">运行授权</a></details><details open><summary>菜谱管理<span class="arrow">▶</span></summary><a href="recipe-official.html" data-page="recipe-official" class="">官方菜谱</a><a href="recipe-my.html" data-page="recipe-my" class="">我的菜谱</a><a href="recipe-org.html" data-page="recipe-org" class="">组织菜谱</a><a href="recipe-permission-log.html" data-page="recipe-permission-log" class="">权限变更记录</a><a href="recipe-merchant-groups.html" data-page="recipe-merchant-groups" class="">商家菜谱分组</a><a href="recipe-store-groups.html" data-page="recipe-store-groups" class="">门店菜谱分组</a><a href="recipe-device.html" data-page="recipe-device" class="">设备菜谱</a><a href="recipe-ingredients.html" data-page="recipe-ingredients" class="">商家食材库</a><a href="recipe-auth.html" data-page="recipe-auth" class="">菜谱运行授权</a></details><details open><summary>数据<span class="arrow">▶</span></summary><div class="nav-flyout-trigger " data-flyout-target="report-flyout"><a href="data-kitchen-report.html" data-page="data-kitchen-report" class="flyout-label">后厨报表</a><span class="flyout-toggle">▶</span><div class="submenu-flyout" id="report-flyout"><div class="flyout-group-label">烹饪类</div><a href="report-store-cooking.html" data-page="report-store-cooking" class="">门店烹饪报表</a><a href="report-recipe-cooking.html" data-page="report-recipe-cooking" class="">菜谱烹饪报表</a><a href="report-device-cooking.html" data-page="report-device-cooking" class="">设备烹饪报表</a><a href="report-ingredient.html" data-page="report-ingredient" class="">用料消耗报表</a><a href="report-time.html" data-page="report-time" class="">时段烹饪报表</a><div class="flyout-group-label">维保类</div><a href="report-seasoning-maint.html" data-page="report-seasoning-maint" class="">调料保养报表</a><a href="report-pot-maint.html" data-page="report-pot-maint" class="">锅保养报表</a></div></div><a href="data-bigscreen.html" data-page="data-bigscreen" class="">数字大屏</a></details><details open><summary>系统<span class="arrow">▶</span></summary><a href="system-org.html" data-page="system-org" class="">组织管理</a><a href="system-store.html" data-page="system-store" class="">门店管理</a><a href="system-account.html" data-page="system-account" class="active">账号管理</a><a href="system-role.html" data-page="system-role" class="">角色权限</a><a href="system-settings.html" data-page="system-settings" class="">系统设置</a></details></nav>
+<main class="main">
+<div class="page-title">账号管理</div>
+
+<div class="card">
+  <div class="tabs"><button class="tab-btn active" data-tab="tab-acc-merchant" data-tab-group="account">商家账号</button><button class="tab-btn " data-tab="tab-acc-store" data-tab-group="account">门店账号</button></div>
+  <div id="tab-acc-merchant" class="tab-content active" data-tab-content data-tab-group="account" style="display:block">
+<div class="filter-bar" style="margin-bottom:12px">
+  <div class="filter-item"><label>姓名</label><input type="text" placeholder="请输入姓名" size="14"></div>
+  <div class="filter-item"><label>账号</label><input type="text" placeholder="请输入账号" size="14"></div>
+  <div class="filter-item"><label>角色</label><select><option selected>请选择角色</option><option>总厨</option><option>大区经理</option><option>厨师</option><option>门店店长</option><option>菜谱人员</option><option>测试角色0613</option></select></div>
+  <button class="btn btn-primary">查询</button>
+  <button class="btn">重置</button>
+</div><div style="display:flex;gap:8px;margin-bottom:12px"><button class="btn btn-primary" data-open-modal="modal-account-add">创建账号</button><button class="btn" data-open-modal="modal-account-scope">修改账号管理范围</button></div><div class="table-wrap"><table><thead><tr><th></th><th>账号</th><th>姓名</th><th>手机号</th><th>组织管理范围</th><th>角色</th><th>是否接收数据推送 ⓘ</th><th>备注</th><th>创建人</th><th>启用状态</th><th>操作</th></tr></thead><tbody><tr><td><input type="checkbox"></td><td>Zong123456</td><td>测试</td><td>13800000001</td><td>1家门店</td><td>菜谱人员</td><td><span>否</span></td><td>--</td><td>超级管理员</td><td><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></td><td><div class='ops'><a class="text-link" data-open-modal="modal-account-pwd-Zong123456">修改密码</a> <a class="text-link" data-open-modal="modal-account-edit-Zong123456">编辑</a> <a class="text-link" style="color:#ef4444" data-open-modal="modal-account-delete-Zong123456">删除</a></div></td></tr><tr><td><input type="checkbox"></td><td>4324qgsd</td><td>12123</td><td>13800000002</td><td>3家门店</td><td>测试角色0613</td><td><span>否</span></td><td>--</td><td>超级管理员</td><td><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></td><td><div class='ops'><a class="text-link" data-open-modal="modal-account-pwd-4324qgsd">修改密码</a> <a class="text-link" data-open-modal="modal-account-edit-4324qgsd">编辑</a> <a class="text-link" style="color:#ef4444" data-open-modal="modal-account-delete-4324qgsd">删除</a></div></td></tr><tr><td><input type="checkbox"></td><td>caiputest</td><td>王厨9</td><td>13800000003</td><td>36家门店</td><td>总厨</td><td><span>否</span></td><td>--</td><td>超级管理员</td><td><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></td><td><div class='ops'><a class="text-link" data-open-modal="modal-account-pwd-caiputest">修改密码</a> <a class="text-link" data-open-modal="modal-account-edit-caiputest">编辑</a> <a class="text-link" style="color:#ef4444" data-open-modal="modal-account-delete-caiputest">删除</a></div></td></tr><tr><td><input type="checkbox"></td><td>testw030601</td><td>0306发版测试</td><td>13800000004</td><td>2家门店</td><td>商家角色0905</td><td><span>否</span></td><td>--</td><td>超级管理员</td><td><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></td><td><div class='ops'><a class="text-link" data-open-modal="modal-account-pwd-testw030601">修改密码</a> <a class="text-link" data-open-modal="modal-account-edit-testw030601">编辑</a> <a class="text-link" style="color:#ef4444" data-open-modal="modal-account-delete-testw030601">删除</a></div></td></tr><tr><td><input type="checkbox"></td><td>testw0122</td><td>测试账号创建01</td><td>13800000005</td><td>36家门店</td><td>测试商家角色20250122</td><td><span>否</span></td><td>--</td><td>超级管理员</td><td><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></td><td><div class='ops'><a class="text-link" data-open-modal="modal-account-pwd-testw0122">修改密码</a> <a class="text-link" data-open-modal="modal-account-edit-testw0122">编辑</a> <a class="text-link" style="color:#ef4444" data-open-modal="modal-account-delete-testw0122">删除</a></div></td></tr><tr><td><input type="checkbox"></td><td>testw0113</td><td>测试一下备注</td><td>13800000006</td><td>5家门店</td><td>测试商家角色0817</td><td><span>否</span></td><td>就是测试一下去备注信息 11111</td><td>超级管理员</td><td><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></td><td><div class='ops'><a class="text-link" data-open-modal="modal-account-pwd-testw0113">修改密码</a> <a class="text-link" data-open-modal="modal-account-edit-testw0113">编辑</a> <a class="text-link" style="color:#ef4444" data-open-modal="modal-account-delete-testw0113">删除</a></div></td></tr><tr><td><input type="checkbox"></td><td>testw1226</td><td>测试商家账号1226</td><td>13800000007</td><td>1家门店</td><td>大区经理</td><td><span>否</span></td><td>测试测试
+哈哈！11111
+123    0000</td><td>超级管理员</td><td><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></td><td><div class='ops'><a class="text-link" data-open-modal="modal-account-pwd-testw1226">修改密码</a> <a class="text-link" data-open-modal="modal-account-edit-testw1226">编辑</a> <a class="text-link" style="color:#ef4444" data-open-modal="modal-account-delete-testw1226">删除</a></div></td></tr><tr><td><input type="checkbox"></td><td>xiaoxinmerchant</td><td>wsg</td><td>13800000008</td><td>36家门店</td><td>测试角色1027-无权限</td><td><span>否</span></td><td>备注一下</td><td>超级管理员</td><td><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></td><td><div class='ops'><a class="text-link" data-open-modal="modal-account-pwd-xiaoxinmerchant">修改密码</a> <a class="text-link" data-open-modal="modal-account-edit-xiaoxinmerchant">编辑</a> <a class="text-link" style="color:#ef4444" data-open-modal="modal-account-delete-xiaoxinmerchant">删除</a></div></td></tr><tr><td><input type="checkbox"></td><td>bingliu001</td><td>bingliu</td><td>13800000009</td><td>1家门店</td><td>总厨</td><td><span>否</span></td><td>--</td><td>超级管理员</td><td><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></td><td><div class='ops'><a class="text-link" data-open-modal="modal-account-pwd-bingliu001">修改密码</a> <a class="text-link" data-open-modal="modal-account-edit-bingliu001">编辑</a> <a class="text-link" style="color:#ef4444" data-open-modal="modal-account-delete-bingliu001">删除</a></div></td></tr></tbody></table></div><div class="pagination-bar"><span>共 36 条记录 第 1 / 4 页</span><div class="pages"><button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">3</button><button class="page-btn">4</button><button class="page-btn">&gt;</button></div><span>10 条/页</span></div></div>
+  <div id="tab-acc-store" class="tab-content" data-tab-content data-tab-group="account" style="display:none">
+<div class="filter-bar" style="margin-bottom:12px">
+  <div class="filter-item"><label>姓名</label><input type="text" placeholder="请输入姓名" size="14"></div>
+  <div class="filter-item"><label>账号</label><input type="text" placeholder="请输入账号" size="14"></div>
+  <div class="filter-item"><label>角色</label><select><option selected>请选择角色</option><option>总厨</option><option>大区经理</option><option>厨师</option><option>门店店长</option><option>菜谱人员</option><option>测试角色0613</option></select></div>
+  <button class="btn btn-primary">查询</button>
+  <button class="btn">重置</button>
+</div><div style="display:flex;gap:8px;margin-bottom:12px"><button class="btn btn-primary" data-open-modal="modal-account-add">创建账号</button><button class="btn" data-open-modal="modal-account-scope">修改账号管理范围</button></div><div class="table-wrap"><table><thead><tr><th></th><th>账号</th><th>姓名</th><th>手机号</th><th>组织管理范围</th><th>角色</th><th>是否接收数据推送 ⓘ</th><th>备注</th><th>创建人</th><th>启用状态</th><th>操作</th></tr></thead><tbody><tr><td><input type="checkbox"></td><td>Zong123456</td><td>测试</td><td>13800000001</td><td>1家门店</td><td>菜谱人员</td><td><span>否</span></td><td>--</td><td>超级管理员</td><td><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></td><td><div class='ops'><a class="text-link" data-open-modal="modal-account-pwd-Zong123456">修改密码</a> <a class="text-link" data-open-modal="modal-account-edit-Zong123456">编辑</a> <a class="text-link" style="color:#ef4444" data-open-modal="modal-account-delete-Zong123456">删除</a></div></td></tr><tr><td><input type="checkbox"></td><td>4324qgsd</td><td>12123</td><td>13800000002</td><td>3家门店</td><td>测试角色0613</td><td><span>否</span></td><td>--</td><td>超级管理员</td><td><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></td><td><div class='ops'><a class="text-link" data-open-modal="modal-account-pwd-4324qgsd">修改密码</a> <a class="text-link" data-open-modal="modal-account-edit-4324qgsd">编辑</a> <a class="text-link" style="color:#ef4444" data-open-modal="modal-account-delete-4324qgsd">删除</a></div></td></tr><tr><td><input type="checkbox"></td><td>caiputest</td><td>王厨9</td><td>13800000003</td><td>36家门店</td><td>总厨</td><td><span>否</span></td><td>--</td><td>超级管理员</td><td><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></td><td><div class='ops'><a class="text-link" data-open-modal="modal-account-pwd-caiputest">修改密码</a> <a class="text-link" data-open-modal="modal-account-edit-caiputest">编辑</a> <a class="text-link" style="color:#ef4444" data-open-modal="modal-account-delete-caiputest">删除</a></div></td></tr><tr><td><input type="checkbox"></td><td>testw030601</td><td>0306发版测试</td><td>13800000004</td><td>2家门店</td><td>商家角色0905</td><td><span>否</span></td><td>--</td><td>超级管理员</td><td><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></td><td><div class='ops'><a class="text-link" data-open-modal="modal-account-pwd-testw030601">修改密码</a> <a class="text-link" data-open-modal="modal-account-edit-testw030601">编辑</a> <a class="text-link" style="color:#ef4444" data-open-modal="modal-account-delete-testw030601">删除</a></div></td></tr><tr><td><input type="checkbox"></td><td>testw0122</td><td>测试账号创建01</td><td>13800000005</td><td>36家门店</td><td>测试商家角色20250122</td><td><span>否</span></td><td>--</td><td>超级管理员</td><td><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></td><td><div class='ops'><a class="text-link" data-open-modal="modal-account-pwd-testw0122">修改密码</a> <a class="text-link" data-open-modal="modal-account-edit-testw0122">编辑</a> <a class="text-link" style="color:#ef4444" data-open-modal="modal-account-delete-testw0122">删除</a></div></td></tr><tr><td><input type="checkbox"></td><td>testw0113</td><td>测试一下备注</td><td>13800000006</td><td>5家门店</td><td>测试商家角色0817</td><td><span>否</span></td><td>就是测试一下去备注信息 11111</td><td>超级管理员</td><td><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></td><td><div class='ops'><a class="text-link" data-open-modal="modal-account-pwd-testw0113">修改密码</a> <a class="text-link" data-open-modal="modal-account-edit-testw0113">编辑</a> <a class="text-link" style="color:#ef4444" data-open-modal="modal-account-delete-testw0113">删除</a></div></td></tr><tr><td><input type="checkbox"></td><td>testw1226</td><td>测试商家账号1226</td><td>13800000007</td><td>1家门店</td><td>大区经理</td><td><span>否</span></td><td>测试测试
+哈哈！11111
+123    0000</td><td>超级管理员</td><td><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></td><td><div class='ops'><a class="text-link" data-open-modal="modal-account-pwd-testw1226">修改密码</a> <a class="text-link" data-open-modal="modal-account-edit-testw1226">编辑</a> <a class="text-link" style="color:#ef4444" data-open-modal="modal-account-delete-testw1226">删除</a></div></td></tr><tr><td><input type="checkbox"></td><td>xiaoxinmerchant</td><td>wsg</td><td>13800000008</td><td>36家门店</td><td>测试角色1027-无权限</td><td><span>否</span></td><td>备注一下</td><td>超级管理员</td><td><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></td><td><div class='ops'><a class="text-link" data-open-modal="modal-account-pwd-xiaoxinmerchant">修改密码</a> <a class="text-link" data-open-modal="modal-account-edit-xiaoxinmerchant">编辑</a> <a class="text-link" style="color:#ef4444" data-open-modal="modal-account-delete-xiaoxinmerchant">删除</a></div></td></tr><tr><td><input type="checkbox"></td><td>bingliu001</td><td>bingliu</td><td>13800000009</td><td>1家门店</td><td>总厨</td><td><span>否</span></td><td>--</td><td>超级管理员</td><td><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></td><td><div class='ops'><a class="text-link" data-open-modal="modal-account-pwd-bingliu001">修改密码</a> <a class="text-link" data-open-modal="modal-account-edit-bingliu001">编辑</a> <a class="text-link" style="color:#ef4444" data-open-modal="modal-account-delete-bingliu001">删除</a></div></td></tr></tbody></table></div><div class="pagination-bar"><span>共 36 条记录 第 1 / 4 页</span><div class="pages"><button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">3</button><button class="page-btn">4</button><button class="page-btn">&gt;</button></div><span>10 条/页</span></div></div>
+</div>
+<div id="modal-account-add" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header"><span>创建账号</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body">
+<div class="form-row"><div class="form-group"><label>账号</label><input placeholder="请输入"></div><div class="form-group"><label>姓名</label><input placeholder="请输入"></div></div>
+<div class="form-row"><div class="form-group"><label>手机号</label><input placeholder="请输入"></div><div class="form-group"><label>角色</label><select><option>请选择角色</option><option>总厨</option><option>大区经理</option><option>厨师</option><option>门店店长</option><option>菜谱人员</option></select></div></div>
+<div class="form-group"><label>组织管理范围</label><select multiple style="height:80px"><option>华东大区</option><option>华北大区</option></select></div>
+<div class="form-group"><label>是否接收数据推送</label><select><option>否</option><option>是</option></select></div>
+<div class="form-group"><label>备注</label><textarea rows="2" placeholder="请输入"></textarea></div>
+</div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary">保存</button></div>
+  </div>
+</div>
+<div id="modal-account-scope" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header"><span>修改账号管理范围</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body">
+<div class="form-group"><label>选择账号</label><input placeholder="请选择账号，支持批量"></div>
+<div class="form-group"><label>组织管理范围</label><select multiple style="height:80px"><option>全部</option><option>华东大区</option><option>华北大区</option><option>上海分区</option></select></div>
+</div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary">确定修改</button></div>
+  </div>
+</div>
+<div id="modal-account-pwd-Zong123456" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header"><span>修改密码</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body">
+<div class="form-row"><div class="form-group"><label>账号</label><input value="Zong123456" readonly></div><div class="form-group"><label>姓名</label><input value="测试" readonly></div></div>
+<div class="form-group"><label>原密码</label><input type="password" placeholder="请输入原密码"></div>
+<div class="form-row"><div class="form-group"><label>新密码</label><input type="password" placeholder="请输入新密码"></div><div class="form-group"><label>确认新密码</label><input type="password" placeholder="请再次输入新密码"></div></div>
+</div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary">保存</button></div>
+  </div>
+</div>
+<div id="modal-account-edit-Zong123456" class="modal-overlay">
+  <div class="modal wide">
+    <div class="modal-header"><span>编辑商家账号</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body">
+<div class="modal-two-col">
+  <div class="modal-col-left">
+    <div class="modal-section-title">基本信息</div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 账号名称</label><input value="Zong123456" readonly></div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 姓名</label><input value="测试"></div>
+    <div class="form-group"><label>手机号</label><input value="13800000001"></div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 选择角色</label><select><option selected>菜谱人员</option><option>总厨</option><option>厨师</option><option>大区经理</option><option>门店店长</option><option>菜谱人员</option></select></div>
+    <div class="form-group"><label>备注</label><textarea rows="3" placeholder="最多50个字"></textarea></div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 是否接收数据推送</label><select><option selected>否</option><option>是</option></select></div>
+  </div>
+  <div class="modal-col-right">
+    <div class="modal-section-title">设置管理门店范围</div>
+    <div class="form-group"><label>复制其他账号管理范围</label><select><option>请选择账号</option><option>超级管理员</option><option>测试账号</option></select></div>
+    <div class="org-tree-hint">选择可管理组织范围（至少需选择一个组织或门店）</div>
+    <div class="org-tree-hint">商家账号可管理所有非门店菜谱，不按已选组织划分菜谱修改权。</div>
+    <div class="org-tree-search"><input type="text" placeholder="门店名称搜索"></div>
+    <div class="org-tree">
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▾</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 小食店1232</span></div>
+        <div class="org-tree-children">
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox" checked><span class="org-tree-label">🏪 炒菜机体验活动</span></div></div>
+        </div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 广东大区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 大四区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 测试一大区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 大一区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 大三区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 又来一个新组织001</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▾</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 123</span></div>
+        <div class="org-tree-children">
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 打擦房里拉蘑</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 02</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 04</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 05</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 06</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 07</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 08</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 09</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 0101</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="selected-stores" style="margin-top:12px">
+      <div class="selected-stores-header"><span>已选择: 1</span><a class="text-link" style="font-size:12px">清空</a></div>
+      <div class="selected-store-list">
+        <span class="selected-store-tag"><span>🏪 炒菜机体验活动</span><span class="remove">✕</span></span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary">确定</button></div>
+  </div>
+</div>
+<div id="modal-account-delete-Zong123456" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header"><span>删除确认</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body"><p style="color:#374151;font-size:14px">确定要删除账号 <strong>Zong123456</strong>（测试）吗？删除后不可恢复。</p></div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary" style="background:#ef4444;border-color:#ef4444">确定删除</button></div>
+  </div>
+</div>
+<div id="modal-account-pwd-4324qgsd" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header"><span>修改密码</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body">
+<div class="form-row"><div class="form-group"><label>账号</label><input value="4324qgsd" readonly></div><div class="form-group"><label>姓名</label><input value="12123" readonly></div></div>
+<div class="form-group"><label>原密码</label><input type="password" placeholder="请输入原密码"></div>
+<div class="form-row"><div class="form-group"><label>新密码</label><input type="password" placeholder="请输入新密码"></div><div class="form-group"><label>确认新密码</label><input type="password" placeholder="请再次输入新密码"></div></div>
+</div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary">保存</button></div>
+  </div>
+</div>
+<div id="modal-account-edit-4324qgsd" class="modal-overlay">
+  <div class="modal wide">
+    <div class="modal-header"><span>编辑商家账号</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body">
+<div class="modal-two-col">
+  <div class="modal-col-left">
+    <div class="modal-section-title">基本信息</div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 账号名称</label><input value="4324qgsd" readonly></div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 姓名</label><input value="12123"></div>
+    <div class="form-group"><label>手机号</label><input value="13800000002"></div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 选择角色</label><select><option selected>测试角色0613</option><option>总厨</option><option>厨师</option><option>大区经理</option><option>门店店长</option><option>菜谱人员</option></select></div>
+    <div class="form-group"><label>备注</label><textarea rows="3" placeholder="最多50个字"></textarea></div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 是否接收数据推送</label><select><option selected>否</option><option>是</option></select></div>
+  </div>
+  <div class="modal-col-right">
+    <div class="modal-section-title">设置管理门店范围</div>
+    <div class="form-group"><label>复制其他账号管理范围</label><select><option>请选择账号</option><option>超级管理员</option><option>测试账号</option></select></div>
+    <div class="org-tree-hint">选择可管理组织范围（至少需选择一个组织或门店）</div>
+    <div class="org-tree-hint">商家账号可管理所有非门店菜谱，不按已选组织划分菜谱修改权。</div>
+    <div class="org-tree-search"><input type="text" placeholder="门店名称搜索"></div>
+    <div class="org-tree">
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▾</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 小食店1232</span></div>
+        <div class="org-tree-children">
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox" checked><span class="org-tree-label">🏪 炒菜机体验活动</span></div></div>
+        </div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 广东大区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 大四区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 测试一大区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 大一区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 大三区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 又来一个新组织001</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▾</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 123</span></div>
+        <div class="org-tree-children">
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 打擦房里拉蘑</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 02</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 04</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 05</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 06</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 07</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 08</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 09</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 0101</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="selected-stores" style="margin-top:12px">
+      <div class="selected-stores-header"><span>已选择: 1</span><a class="text-link" style="font-size:12px">清空</a></div>
+      <div class="selected-store-list">
+        <span class="selected-store-tag"><span>🏪 炒菜机体验活动</span><span class="remove">✕</span></span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary">确定</button></div>
+  </div>
+</div>
+<div id="modal-account-delete-4324qgsd" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header"><span>删除确认</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body"><p style="color:#374151;font-size:14px">确定要删除账号 <strong>4324qgsd</strong>（12123）吗？删除后不可恢复。</p></div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary" style="background:#ef4444;border-color:#ef4444">确定删除</button></div>
+  </div>
+</div>
+<div id="modal-account-pwd-caiputest" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header"><span>修改密码</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body">
+<div class="form-row"><div class="form-group"><label>账号</label><input value="caiputest" readonly></div><div class="form-group"><label>姓名</label><input value="王厨9" readonly></div></div>
+<div class="form-group"><label>原密码</label><input type="password" placeholder="请输入原密码"></div>
+<div class="form-row"><div class="form-group"><label>新密码</label><input type="password" placeholder="请输入新密码"></div><div class="form-group"><label>确认新密码</label><input type="password" placeholder="请再次输入新密码"></div></div>
+</div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary">保存</button></div>
+  </div>
+</div>
+<div id="modal-account-edit-caiputest" class="modal-overlay">
+  <div class="modal wide">
+    <div class="modal-header"><span>编辑商家账号</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body">
+<div class="modal-two-col">
+  <div class="modal-col-left">
+    <div class="modal-section-title">基本信息</div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 账号名称</label><input value="caiputest" readonly></div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 姓名</label><input value="王厨9"></div>
+    <div class="form-group"><label>手机号</label><input value="13800000003"></div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 选择角色</label><select><option selected>总厨</option><option>总厨</option><option>厨师</option><option>大区经理</option><option>门店店长</option><option>菜谱人员</option></select></div>
+    <div class="form-group"><label>备注</label><textarea rows="3" placeholder="最多50个字"></textarea></div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 是否接收数据推送</label><select><option selected>否</option><option>是</option></select></div>
+  </div>
+  <div class="modal-col-right">
+    <div class="modal-section-title">设置管理门店范围</div>
+    <div class="form-group"><label>复制其他账号管理范围</label><select><option>请选择账号</option><option>超级管理员</option><option>测试账号</option></select></div>
+    <div class="org-tree-hint">选择可管理组织范围（至少需选择一个组织或门店）</div>
+    <div class="org-tree-hint">商家账号可管理所有非门店菜谱，不按已选组织划分菜谱修改权。</div>
+    <div class="org-tree-search"><input type="text" placeholder="门店名称搜索"></div>
+    <div class="org-tree">
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▾</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 小食店1232</span></div>
+        <div class="org-tree-children">
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox" checked><span class="org-tree-label">🏪 炒菜机体验活动</span></div></div>
+        </div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 广东大区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 大四区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 测试一大区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 大一区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 大三区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 又来一个新组织001</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▾</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 123</span></div>
+        <div class="org-tree-children">
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 打擦房里拉蘑</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 02</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 04</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 05</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 06</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 07</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 08</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 09</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 0101</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="selected-stores" style="margin-top:12px">
+      <div class="selected-stores-header"><span>已选择: 1</span><a class="text-link" style="font-size:12px">清空</a></div>
+      <div class="selected-store-list">
+        <span class="selected-store-tag"><span>🏪 炒菜机体验活动</span><span class="remove">✕</span></span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary">确定</button></div>
+  </div>
+</div>
+<div id="modal-account-delete-caiputest" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header"><span>删除确认</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body"><p style="color:#374151;font-size:14px">确定要删除账号 <strong>caiputest</strong>（王厨9）吗？删除后不可恢复。</p></div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary" style="background:#ef4444;border-color:#ef4444">确定删除</button></div>
+  </div>
+</div>
+<div id="modal-account-pwd-testw030601" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header"><span>修改密码</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body">
+<div class="form-row"><div class="form-group"><label>账号</label><input value="testw030601" readonly></div><div class="form-group"><label>姓名</label><input value="0306发版测试" readonly></div></div>
+<div class="form-group"><label>原密码</label><input type="password" placeholder="请输入原密码"></div>
+<div class="form-row"><div class="form-group"><label>新密码</label><input type="password" placeholder="请输入新密码"></div><div class="form-group"><label>确认新密码</label><input type="password" placeholder="请再次输入新密码"></div></div>
+</div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary">保存</button></div>
+  </div>
+</div>
+<div id="modal-account-edit-testw030601" class="modal-overlay">
+  <div class="modal wide">
+    <div class="modal-header"><span>编辑商家账号</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body">
+<div class="modal-two-col">
+  <div class="modal-col-left">
+    <div class="modal-section-title">基本信息</div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 账号名称</label><input value="testw030601" readonly></div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 姓名</label><input value="0306发版测试"></div>
+    <div class="form-group"><label>手机号</label><input value="13800000004"></div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 选择角色</label><select><option selected>商家角色0905</option><option>总厨</option><option>厨师</option><option>大区经理</option><option>门店店长</option><option>菜谱人员</option></select></div>
+    <div class="form-group"><label>备注</label><textarea rows="3" placeholder="最多50个字"></textarea></div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 是否接收数据推送</label><select><option selected>否</option><option>是</option></select></div>
+  </div>
+  <div class="modal-col-right">
+    <div class="modal-section-title">设置管理门店范围</div>
+    <div class="form-group"><label>复制其他账号管理范围</label><select><option>请选择账号</option><option>超级管理员</option><option>测试账号</option></select></div>
+    <div class="org-tree-hint">选择可管理组织范围（至少需选择一个组织或门店）</div>
+    <div class="org-tree-hint">商家账号可管理所有非门店菜谱，不按已选组织划分菜谱修改权。</div>
+    <div class="org-tree-search"><input type="text" placeholder="门店名称搜索"></div>
+    <div class="org-tree">
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▾</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 小食店1232</span></div>
+        <div class="org-tree-children">
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox" checked><span class="org-tree-label">🏪 炒菜机体验活动</span></div></div>
+        </div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 广东大区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 大四区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 测试一大区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 大一区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 大三区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 又来一个新组织001</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▾</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 123</span></div>
+        <div class="org-tree-children">
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 打擦房里拉蘑</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 02</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 04</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 05</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 06</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 07</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 08</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 09</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 0101</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="selected-stores" style="margin-top:12px">
+      <div class="selected-stores-header"><span>已选择: 1</span><a class="text-link" style="font-size:12px">清空</a></div>
+      <div class="selected-store-list">
+        <span class="selected-store-tag"><span>🏪 炒菜机体验活动</span><span class="remove">✕</span></span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary">确定</button></div>
+  </div>
+</div>
+<div id="modal-account-delete-testw030601" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header"><span>删除确认</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body"><p style="color:#374151;font-size:14px">确定要删除账号 <strong>testw030601</strong>（0306发版测试）吗？删除后不可恢复。</p></div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary" style="background:#ef4444;border-color:#ef4444">确定删除</button></div>
+  </div>
+</div>
+<div id="modal-account-pwd-testw0122" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header"><span>修改密码</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body">
+<div class="form-row"><div class="form-group"><label>账号</label><input value="testw0122" readonly></div><div class="form-group"><label>姓名</label><input value="测试账号创建01" readonly></div></div>
+<div class="form-group"><label>原密码</label><input type="password" placeholder="请输入原密码"></div>
+<div class="form-row"><div class="form-group"><label>新密码</label><input type="password" placeholder="请输入新密码"></div><div class="form-group"><label>确认新密码</label><input type="password" placeholder="请再次输入新密码"></div></div>
+</div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary">保存</button></div>
+  </div>
+</div>
+<div id="modal-account-edit-testw0122" class="modal-overlay">
+  <div class="modal wide">
+    <div class="modal-header"><span>编辑商家账号</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body">
+<div class="modal-two-col">
+  <div class="modal-col-left">
+    <div class="modal-section-title">基本信息</div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 账号名称</label><input value="testw0122" readonly></div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 姓名</label><input value="测试账号创建01"></div>
+    <div class="form-group"><label>手机号</label><input value="13800000005"></div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 选择角色</label><select><option selected>测试商家角色20250122</option><option>总厨</option><option>厨师</option><option>大区经理</option><option>门店店长</option><option>菜谱人员</option></select></div>
+    <div class="form-group"><label>备注</label><textarea rows="3" placeholder="最多50个字"></textarea></div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 是否接收数据推送</label><select><option selected>否</option><option>是</option></select></div>
+  </div>
+  <div class="modal-col-right">
+    <div class="modal-section-title">设置管理门店范围</div>
+    <div class="form-group"><label>复制其他账号管理范围</label><select><option>请选择账号</option><option>超级管理员</option><option>测试账号</option></select></div>
+    <div class="org-tree-hint">选择可管理组织范围（至少需选择一个组织或门店）</div>
+    <div class="org-tree-hint">商家账号可管理所有非门店菜谱，不按已选组织划分菜谱修改权。</div>
+    <div class="org-tree-search"><input type="text" placeholder="门店名称搜索"></div>
+    <div class="org-tree">
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▾</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 小食店1232</span></div>
+        <div class="org-tree-children">
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox" checked><span class="org-tree-label">🏪 炒菜机体验活动</span></div></div>
+        </div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 广东大区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 大四区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 测试一大区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 大一区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 大三区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 又来一个新组织001</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▾</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 123</span></div>
+        <div class="org-tree-children">
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 打擦房里拉蘑</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 02</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 04</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 05</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 06</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 07</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 08</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 09</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 0101</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="selected-stores" style="margin-top:12px">
+      <div class="selected-stores-header"><span>已选择: 1</span><a class="text-link" style="font-size:12px">清空</a></div>
+      <div class="selected-store-list">
+        <span class="selected-store-tag"><span>🏪 炒菜机体验活动</span><span class="remove">✕</span></span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary">确定</button></div>
+  </div>
+</div>
+<div id="modal-account-delete-testw0122" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header"><span>删除确认</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body"><p style="color:#374151;font-size:14px">确定要删除账号 <strong>testw0122</strong>（测试账号创建01）吗？删除后不可恢复。</p></div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary" style="background:#ef4444;border-color:#ef4444">确定删除</button></div>
+  </div>
+</div>
+<div id="modal-account-pwd-testw0113" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header"><span>修改密码</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body">
+<div class="form-row"><div class="form-group"><label>账号</label><input value="testw0113" readonly></div><div class="form-group"><label>姓名</label><input value="测试一下备注" readonly></div></div>
+<div class="form-group"><label>原密码</label><input type="password" placeholder="请输入原密码"></div>
+<div class="form-row"><div class="form-group"><label>新密码</label><input type="password" placeholder="请输入新密码"></div><div class="form-group"><label>确认新密码</label><input type="password" placeholder="请再次输入新密码"></div></div>
+</div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary">保存</button></div>
+  </div>
+</div>
+<div id="modal-account-edit-testw0113" class="modal-overlay">
+  <div class="modal wide">
+    <div class="modal-header"><span>编辑商家账号</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body">
+<div class="modal-two-col">
+  <div class="modal-col-left">
+    <div class="modal-section-title">基本信息</div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 账号名称</label><input value="testw0113" readonly></div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 姓名</label><input value="测试一下备注"></div>
+    <div class="form-group"><label>手机号</label><input value="13800000006"></div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 选择角色</label><select><option selected>测试商家角色0817</option><option>总厨</option><option>厨师</option><option>大区经理</option><option>门店店长</option><option>菜谱人员</option></select></div>
+    <div class="form-group"><label>备注</label><textarea rows="3" placeholder="最多50个字">就是测试一下去备注信息 11111</textarea></div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 是否接收数据推送</label><select><option selected>否</option><option>是</option></select></div>
+  </div>
+  <div class="modal-col-right">
+    <div class="modal-section-title">设置管理门店范围</div>
+    <div class="form-group"><label>复制其他账号管理范围</label><select><option>请选择账号</option><option>超级管理员</option><option>测试账号</option></select></div>
+    <div class="org-tree-hint">选择可管理组织范围（至少需选择一个组织或门店）</div>
+    <div class="org-tree-hint">商家账号可管理所有非门店菜谱，不按已选组织划分菜谱修改权。</div>
+    <div class="org-tree-search"><input type="text" placeholder="门店名称搜索"></div>
+    <div class="org-tree">
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▾</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 小食店1232</span></div>
+        <div class="org-tree-children">
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox" checked><span class="org-tree-label">🏪 炒菜机体验活动</span></div></div>
+        </div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 广东大区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 大四区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 测试一大区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 大一区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 大三区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 又来一个新组织001</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▾</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 123</span></div>
+        <div class="org-tree-children">
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 打擦房里拉蘑</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 02</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 04</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 05</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 06</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 07</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 08</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 09</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 0101</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="selected-stores" style="margin-top:12px">
+      <div class="selected-stores-header"><span>已选择: 1</span><a class="text-link" style="font-size:12px">清空</a></div>
+      <div class="selected-store-list">
+        <span class="selected-store-tag"><span>🏪 炒菜机体验活动</span><span class="remove">✕</span></span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary">确定</button></div>
+  </div>
+</div>
+<div id="modal-account-delete-testw0113" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header"><span>删除确认</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body"><p style="color:#374151;font-size:14px">确定要删除账号 <strong>testw0113</strong>（测试一下备注）吗？删除后不可恢复。</p></div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary" style="background:#ef4444;border-color:#ef4444">确定删除</button></div>
+  </div>
+</div>
+<div id="modal-account-pwd-testw1226" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header"><span>修改密码</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body">
+<div class="form-row"><div class="form-group"><label>账号</label><input value="testw1226" readonly></div><div class="form-group"><label>姓名</label><input value="测试商家账号1226" readonly></div></div>
+<div class="form-group"><label>原密码</label><input type="password" placeholder="请输入原密码"></div>
+<div class="form-row"><div class="form-group"><label>新密码</label><input type="password" placeholder="请输入新密码"></div><div class="form-group"><label>确认新密码</label><input type="password" placeholder="请再次输入新密码"></div></div>
+</div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary">保存</button></div>
+  </div>
+</div>
+<div id="modal-account-edit-testw1226" class="modal-overlay">
+  <div class="modal wide">
+    <div class="modal-header"><span>编辑商家账号</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body">
+<div class="modal-two-col">
+  <div class="modal-col-left">
+    <div class="modal-section-title">基本信息</div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 账号名称</label><input value="testw1226" readonly></div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 姓名</label><input value="测试商家账号1226"></div>
+    <div class="form-group"><label>手机号</label><input value="13800000007"></div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 选择角色</label><select><option selected>大区经理</option><option>总厨</option><option>厨师</option><option>大区经理</option><option>门店店长</option><option>菜谱人员</option></select></div>
+    <div class="form-group"><label>备注</label><textarea rows="3" placeholder="最多50个字">测试测试
+哈哈！11111
+123    0000</textarea></div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 是否接收数据推送</label><select><option selected>否</option><option>是</option></select></div>
+  </div>
+  <div class="modal-col-right">
+    <div class="modal-section-title">设置管理门店范围</div>
+    <div class="form-group"><label>复制其他账号管理范围</label><select><option>请选择账号</option><option>超级管理员</option><option>测试账号</option></select></div>
+    <div class="org-tree-hint">选择可管理组织范围（至少需选择一个组织或门店）</div>
+    <div class="org-tree-hint">商家账号可管理所有非门店菜谱，不按已选组织划分菜谱修改权。</div>
+    <div class="org-tree-search"><input type="text" placeholder="门店名称搜索"></div>
+    <div class="org-tree">
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▾</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 小食店1232</span></div>
+        <div class="org-tree-children">
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox" checked><span class="org-tree-label">🏪 炒菜机体验活动</span></div></div>
+        </div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 广东大区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 大四区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 测试一大区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 大一区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 大三区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 又来一个新组织001</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▾</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 123</span></div>
+        <div class="org-tree-children">
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 打擦房里拉蘑</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 02</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 04</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 05</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 06</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 07</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 08</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 09</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 0101</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="selected-stores" style="margin-top:12px">
+      <div class="selected-stores-header"><span>已选择: 1</span><a class="text-link" style="font-size:12px">清空</a></div>
+      <div class="selected-store-list">
+        <span class="selected-store-tag"><span>🏪 炒菜机体验活动</span><span class="remove">✕</span></span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary">确定</button></div>
+  </div>
+</div>
+<div id="modal-account-delete-testw1226" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header"><span>删除确认</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body"><p style="color:#374151;font-size:14px">确定要删除账号 <strong>testw1226</strong>（测试商家账号1226）吗？删除后不可恢复。</p></div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary" style="background:#ef4444;border-color:#ef4444">确定删除</button></div>
+  </div>
+</div>
+<div id="modal-account-pwd-xiaoxinmerchant" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header"><span>修改密码</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body">
+<div class="form-row"><div class="form-group"><label>账号</label><input value="xiaoxinmerchant" readonly></div><div class="form-group"><label>姓名</label><input value="wsg" readonly></div></div>
+<div class="form-group"><label>原密码</label><input type="password" placeholder="请输入原密码"></div>
+<div class="form-row"><div class="form-group"><label>新密码</label><input type="password" placeholder="请输入新密码"></div><div class="form-group"><label>确认新密码</label><input type="password" placeholder="请再次输入新密码"></div></div>
+</div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary">保存</button></div>
+  </div>
+</div>
+<div id="modal-account-edit-xiaoxinmerchant" class="modal-overlay">
+  <div class="modal wide">
+    <div class="modal-header"><span>编辑商家账号</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body">
+<div class="modal-two-col">
+  <div class="modal-col-left">
+    <div class="modal-section-title">基本信息</div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 账号名称</label><input value="xiaoxinmerchant" readonly></div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 姓名</label><input value="wsg"></div>
+    <div class="form-group"><label>手机号</label><input value="13800000008"></div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 选择角色</label><select><option selected>测试角色1027-无权限</option><option>总厨</option><option>厨师</option><option>大区经理</option><option>门店店长</option><option>菜谱人员</option></select></div>
+    <div class="form-group"><label>备注</label><textarea rows="3" placeholder="最多50个字">备注一下</textarea></div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 是否接收数据推送</label><select><option selected>否</option><option>是</option></select></div>
+  </div>
+  <div class="modal-col-right">
+    <div class="modal-section-title">设置管理门店范围</div>
+    <div class="form-group"><label>复制其他账号管理范围</label><select><option>请选择账号</option><option>超级管理员</option><option>测试账号</option></select></div>
+    <div class="org-tree-hint">选择可管理组织范围（至少需选择一个组织或门店）</div>
+    <div class="org-tree-hint">商家账号可管理所有非门店菜谱，不按已选组织划分菜谱修改权。</div>
+    <div class="org-tree-search"><input type="text" placeholder="门店名称搜索"></div>
+    <div class="org-tree">
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▾</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 小食店1232</span></div>
+        <div class="org-tree-children">
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox" checked><span class="org-tree-label">🏪 炒菜机体验活动</span></div></div>
+        </div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 广东大区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 大四区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 测试一大区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 大一区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 大三区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 又来一个新组织001</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▾</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 123</span></div>
+        <div class="org-tree-children">
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 打擦房里拉蘑</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 02</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 04</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 05</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 06</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 07</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 08</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 09</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 0101</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="selected-stores" style="margin-top:12px">
+      <div class="selected-stores-header"><span>已选择: 1</span><a class="text-link" style="font-size:12px">清空</a></div>
+      <div class="selected-store-list">
+        <span class="selected-store-tag"><span>🏪 炒菜机体验活动</span><span class="remove">✕</span></span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary">确定</button></div>
+  </div>
+</div>
+<div id="modal-account-delete-xiaoxinmerchant" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header"><span>删除确认</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body"><p style="color:#374151;font-size:14px">确定要删除账号 <strong>xiaoxinmerchant</strong>（wsg）吗？删除后不可恢复。</p></div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary" style="background:#ef4444;border-color:#ef4444">确定删除</button></div>
+  </div>
+</div>
+<div id="modal-account-pwd-bingliu001" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header"><span>修改密码</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body">
+<div class="form-row"><div class="form-group"><label>账号</label><input value="bingliu001" readonly></div><div class="form-group"><label>姓名</label><input value="bingliu" readonly></div></div>
+<div class="form-group"><label>原密码</label><input type="password" placeholder="请输入原密码"></div>
+<div class="form-row"><div class="form-group"><label>新密码</label><input type="password" placeholder="请输入新密码"></div><div class="form-group"><label>确认新密码</label><input type="password" placeholder="请再次输入新密码"></div></div>
+</div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary">保存</button></div>
+  </div>
+</div>
+<div id="modal-account-edit-bingliu001" class="modal-overlay">
+  <div class="modal wide">
+    <div class="modal-header"><span>编辑商家账号</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body">
+<div class="modal-two-col">
+  <div class="modal-col-left">
+    <div class="modal-section-title">基本信息</div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 账号名称</label><input value="bingliu001" readonly></div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 姓名</label><input value="bingliu"></div>
+    <div class="form-group"><label>手机号</label><input value="13800000009"></div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 选择角色</label><select><option selected>总厨</option><option>总厨</option><option>厨师</option><option>大区经理</option><option>门店店长</option><option>菜谱人员</option></select></div>
+    <div class="form-group"><label>备注</label><textarea rows="3" placeholder="最多50个字"></textarea></div>
+    <div class="form-group"><label><span style="color:#ef4444">*</span> 是否接收数据推送</label><select><option selected>否</option><option>是</option></select></div>
+  </div>
+  <div class="modal-col-right">
+    <div class="modal-section-title">设置管理门店范围</div>
+    <div class="form-group"><label>复制其他账号管理范围</label><select><option>请选择账号</option><option>超级管理员</option><option>测试账号</option></select></div>
+    <div class="org-tree-hint">选择可管理组织范围（至少需选择一个组织或门店）</div>
+    <div class="org-tree-hint">商家账号可管理所有非门店菜谱，不按已选组织划分菜谱修改权。</div>
+    <div class="org-tree-search"><input type="text" placeholder="门店名称搜索"></div>
+    <div class="org-tree">
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▾</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 小食店1232</span></div>
+        <div class="org-tree-children">
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox" checked><span class="org-tree-label">🏪 炒菜机体验活动</span></div></div>
+        </div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 广东大区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 大四区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 测试一大区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 大一区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 大三区</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▸</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 又来一个新组织001</span></div>
+      </div>
+      <div class="org-tree-node">
+        <div class="org-tree-row"><span class="org-tree-icon">▾</span><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏢 123</span></div>
+        <div class="org-tree-children">
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 打擦房里拉蘑</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 02</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 04</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 05</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 06</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 07</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 08</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 09</span></div></div>
+          <div class="org-tree-node"><div class="org-tree-row"><input type="checkbox" class="org-tree-checkbox"><span class="org-tree-label">🏪 0101</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="selected-stores" style="margin-top:12px">
+      <div class="selected-stores-header"><span>已选择: 1</span><a class="text-link" style="font-size:12px">清空</a></div>
+      <div class="selected-store-list">
+        <span class="selected-store-tag"><span>🏪 炒菜机体验活动</span><span class="remove">✕</span></span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary">确定</button></div>
+  </div>
+</div>
+<div id="modal-account-delete-bingliu001" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header"><span>删除确认</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body"><p style="color:#374151;font-size:14px">确定要删除账号 <strong>bingliu001</strong>（bingliu）吗？删除后不可恢复。</p></div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary" style="background:#ef4444;border-color:#ef4444">确定删除</button></div>
+  </div>
+</div>
+
+</main>
+</div>
+</div>
+<script src="common.js"></script>
+</body>
+</html>
