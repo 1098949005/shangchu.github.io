@@ -185,6 +185,32 @@ body {
 .selected-store-tag .remove { color: #9ca3af; cursor: pointer; }
 .selected-store-tag .remove:hover { color: #ef4444; }
 .empty-selected { color: #9ca3af; font-size: 12px; }
+.flow-banner { background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:13px;color:#1e40af;line-height:1.7; }
+.flow-banner b { color:#1d4ed8; }
+.flow-banner .flow-banner-title { font-weight:600;margin-bottom:4px;display:block; }
+.flow-steps { display:flex;flex-wrap:wrap;gap:8px;margin-top:6px; }
+.flow-step-chip { background:#fff;border:1px solid #bfdbfe;border-radius:999px;padding:3px 12px;font-size:12px;color:#1e40af; }
+.opening-sms { margin-top:14px;background:#f9fafb;border:1px dashed #d1d5db;border-radius:8px;padding:12px 14px; }
+.opening-sms .opening-sms-title { font-size:12px;font-weight:600;color:#374151;margin-bottom:6px; }
+.opening-sms-box { background:#fff;border:1px solid #e5e7eb;border-radius:6px;padding:10px 12px;font-size:13px;color:#374151;line-height:1.6; }
+.opening-sms-box b { color:#1d4ed8; }
+.opening-sms-hint { font-size:12px;color:#6b7280;margin-top:8px;line-height:1.5; }
+
+/* 创建账号：步骤条 + 分区 */
+.create-steps { display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap; }
+.create-step { background:#f3f4f6;color:#6b7280;border-radius:999px;padding:5px 14px;font-size:13px; }
+.create-step.active { background:var(--primary);color:#fff;font-weight:500; }
+.create-step-arrow { color:#9ca3af;font-size:13px; }
+.form-section-title { font-size:13px;font-weight:600;color:#374151;margin:18px 0 10px;padding-left:8px;border-left:3px solid var(--primary); }
+.perm-hint { font-size:12px;color:#6b7280;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:8px 10px;margin:4px 0 10px;line-height:1.5; }
+.opening-operator { display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#1e40af;background:#eff6ff;border:1px solid #bfdbfe;border-radius:6px;padding:4px 10px; }
+.opening-operator b { font-weight:600; }
+.flow-path { margin-top:8px;display:flex;flex-wrap:wrap;gap:10px; }
+.flow-path-item { background:#fff;border:1px solid #e5e7eb;border-radius:6px;padding:8px 10px;font-size:12px;color:#374151;flex:1 1 240px; }
+.flow-path-item b { color:#1d4ed8;display:block;margin-bottom:4px;font-size:13px; }
+
+.opening-pwd-row { display:flex;gap:8px;align-items:center; }
+.opening-pwd-row .btn-sm { white-space:nowrap; }
 .table-wrap { overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
 th, td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; color: #374151; vertical-align: middle; }
