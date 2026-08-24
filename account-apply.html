@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>账号开通说明 - 老板商厨食神商家后台</title>
+<title>账号开通申请 - 老板商厨食神商家后台</title>
 <link rel="stylesheet" href="common.css"></head>
-<body data-page="register" class="auth-body">
+<body data-page="account-apply" class="auth-body">
 
 
 <style>
@@ -77,25 +77,45 @@
     <div class="auth-card auth-card-wide">
       <div class="auth-head">
         <div class="auth-logo">厨</div>
-        <h1 class="auth-title">账号开通说明</h1>
-        <p class="auth-sub">本系统不开放自主注册，账号由运营统一开通</p>
+        <h1 class="auth-title">账号开通申请</h1>
+        <p class="auth-sub">初始超级管理员账号开通提需（销售 / 运营内部使用）</p>
       </div>
       <div class="open-note">
-        <strong>说明：</strong>商家账号（超级管理员）由客户对接销售提需，经运营人员注册开通后，系统自动将账密通过短信发送至对应手机号。您无需、也不能自行注册。
+        <strong>提需说明：</strong>本系统不开放自主注册。请销售在此填写客户信息并提交，运营人员收到后将注册<strong>初始超级管理员</strong>账号，系统自动将账密通过短信下发至联系人手机号。
       </div>
-      <div class="open-flow">
-        <div class="open-step"><div class="open-step-no">1</div><div class="open-step-body"><div class="open-step-title">销售提需</div><div class="open-step-desc">客户对接销售收集联系人、手机号、品牌简称等信息并提交开通需求。</div></div></div>
-        <div class="open-step"><div class="open-step-no">2</div><div class="open-step-body"><div class="open-step-title">内部流转</div><div class="open-step-desc">销售内部提需给运营人员，运营核对客户信息后准备开通。</div></div></div>
-        <div class="open-step"><div class="open-step-no">3</div><div class="open-step-body"><div class="open-step-title">运营注册</div><div class="open-step-desc">运营人员在后台注册初始超级管理员账号，分配登录凭证与默认权限。</div></div></div>
-        <div class="open-step"><div class="open-step-no">4</div><div class="open-step-body"><div class="open-step-title">短信下发</div><div class="open-step-desc">系统自动发送短信，将账号与初始密码推送至对应手机号。</div></div></div>
+      <form id="applyForm" onsubmit="event.preventDefault();document.getElementById('applyResult').style.display='block';document.getElementById('applyForm').style.display='none';">
+        <div class="auth-field">
+          <label>品牌简称 <span style="color:#ef4444">*</span></label>
+          <input type="text" placeholder="如：某某餐饮 / 某某食堂" required>
+        </div>
+        <div class="auth-field">
+          <label>客户联系人姓名 <span style="color:#ef4444">*</span></label>
+          <input type="text" placeholder="请输入联系人姓名" required>
+        </div>
+        <div class="auth-field">
+          <label>联系人手机号 <span style="color:#ef4444">*</span></label>
+          <input type="tel" placeholder="用于接收开通短信（账号唯一标识，一手机一号）" required>
+        </div>
+        <div class="auth-field">
+          <label>客户区域 / 省份</label>
+          <input type="text" placeholder="如：华东 / 浙江杭州（便于运营分配组织）">
+        </div>
+        <div class="auth-field">
+          <label>预计门店数量</label>
+          <input type="number" min="1" placeholder="如：3">
+        </div>
+        <div class="auth-field">
+          <label>备注</label>
+          <textarea placeholder="补充说明（选填，≤200字）" rows="3" style="width:100%;border:1px solid #d1d5db;border-radius:8px;padding:11px 12px;font-size:14px;box-sizing:border-box;font-family:inherit;resize:vertical;"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary auth-submit">提交开通申请</button>
+      </form>
+      <div id="applyResult" class="open-sms-box" style="display:none;background:#ecfdf5;border-color:#6ee7b7;color:#065f46;">
+        ✓ 开通申请已提交，管理员将在后台「开通申请待办」中收到该申请并处理，注册初始超级管理员账号后通过短信将账密下发至联系人手机号。
       </div>
-      <div class="open-sms">
-        <div class="open-sms-title">开通短信示例</div>
-        <div class="open-sms-box">【老板商厨】您好！[xxxx品牌名]商家已开通账号：xxxxx 初始密码为：xxxx，首次登录请修改密码，并妥善保管。</div>
+      <div class="auth-login-link" style="margin-top:18px;">
+        已是管理员？<a class="text-link" href="login.html">返回登录</a>　·　<a class="text-link" href="register.html">查看开通说明</a>
       </div>
-      <div class="open-login-tip">拿到账号后，请使用「账号 / 手机号 + 密码」登录本系统；首次登录不强制修改密码，但建议尽快修改以保障安全。</div>
-      <button type="button" class="btn btn-primary auth-submit" onclick="window.location.href='login.html'">返回登录</button>
-      <button type="button" class="btn auth-submit-ghost" onclick="window.location.href='account-apply.html'">销售 / 运营提需入口</button>
     </div>
   </div>
 </div>
