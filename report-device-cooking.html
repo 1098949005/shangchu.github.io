@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>设备烹饪报表 - 老板商厨食神商家后台</title>
+<link rel="stylesheet" href="common.css"></head>
+<body data-page="report-device-cooking">
+<div class="app">
+<div class="header">
+  <div class="header-left">
+    <div class="logo">厨</div><div class="system-title">老板商厨食神商家后台</div>
+    <span class="header-org">查看下属单位 <select><option>全部单位</option><option>华东大区</option><option>华北大区</option></select></span>
+  </div>
+  <div class="header-right">
+    <span>菜谱计量单位 <select><option>公制</option><option>英制</option></select></span>
+    <span class="task-center-btn" data-open-task>任务中心</span>
+    <div class="user-menu" id="userMenu">
+      <div class="user-trigger" data-toggle-user-menu>
+        <div class="user-avatar">管</div>
+        <span class="user-name">管理员</span>
+        <span class="user-arrow">▼</span>
+      </div>
+      <div class="user-dropdown" id="userDropdown">
+        <div class="user-dropdown-header">
+          <div class="user-avatar">管</div>
+          <div>
+            <div class="user-dropdown-name">管理员</div>
+            <div class="user-dropdown-role">系统管理员</div>
+          </div>
+        </div>
+        <div class="user-dropdown-menu">
+          <a class="user-dropdown-item" data-open-modal="modal-change-password">修改密码</a>
+          <a class="user-dropdown-item danger" data-logout>退出登录</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="task-overlay" data-close-drawer></div>
+<div class="task-drawer drawer">
+  <div class="task-drawer-header"><span>任务中心</span><button class="btn btn-sm" data-close-drawer>关闭</button></div>
+  <div class="task-drawer-body">
+    <div class="tabs"><button class="tab-btn active" data-tab="tab-my-tasks" data-tab-group="task">我的任务</button><button class="tab-btn " data-tab="tab-my-exports" data-tab-group="task">我的导出</button></div>
+    <div id="tab-my-tasks" class="tab-content active" data-tab-content data-tab-group="task" style="display:block">
+<p class="recipe-meta" style="margin-bottom:12px">仅显示近 7 天任务</p>
+<div class="table-wrap"><table><thead><tr><th>任务名称</th><th>处理时间</th><th>进度</th><th>状态</th><th>操作</th></tr></thead><tbody>
+<tr><td>菜谱同步下发</td><td>2026-07-28 14:30</td><td><div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div> 80%</td><td><span class="badge badge-warning">进行中</span></td><td><a class="text-link">查看</a></td></tr>
+<tr><td>设备批量导出</td><td>2026-07-28 13:10</td><td><div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div> 100%</td><td><span class="badge badge-success">已完成</span></td><td><a class="text-link">查看</a></td></tr>
+<tr><td>门店数据汇总</td><td>2026-07-27 18:00</td><td><div class="progress-bar"><div class="progress-fill" style="width:45%"></div></div> 45%</td><td><span class="badge badge-warning">进行中</span></td><td><a class="text-link">查看</a></td></tr>
+</tbody></table></div>
+</div>
+    <div id="tab-my-exports" class="tab-content" data-tab-content data-tab-group="task" style="display:none">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><span class="recipe-meta">导出文件保留 30 天</span><button class="btn btn-sm">刷新</button></div>
+<div class="table-wrap"><table><thead><tr><th>文件名称</th><th>导出时间</th><th>导出进度</th><th>状态</th><th>操作</th></tr></thead><tbody>
+<tr><td>设备清单_20260728.xlsx</td><td>2026-07-28 10:00</td><td><div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div> 100%</td><td><span class="badge badge-success">可下载</span></td><td><a class="text-link">下载</a></td></tr>
+<tr><td>后厨报表_20260727.xlsx</td><td>2026-07-27 16:30</td><td><div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div> 100%</td><td><span class="badge badge-success">可下载</span></td><td><a class="text-link">下载</a></td></tr>
+<tr><td>菜谱汇总_20260725.xlsx</td><td>2026-07-25 09:15</td><td><div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div> 60%</td><td><span class="badge badge-warning">导出中</span></td><td><a class="text-link">下载</a></td></tr>
+</tbody></table></div>
+</div>
+  </div>
+</div>
+
+<div id="modal-change-password" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header"><span>修改密码</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body">
+<div class="form-group"><label>原密码</label><input type="password" placeholder="请输入原密码"></div>
+<div class="form-row"><div class="form-group"><label>新密码</label><input type="password" placeholder="请输入新密码"></div><div class="form-group"><label>确认新密码</label><input type="password" placeholder="请再次输入新密码"></div></div>
+</div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary">保存</button></div>
+  </div>
+</div>
+<div id="modal-logout" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-header"><span>退出登录</span><button class="btn btn-sm" data-close-modal style="font-weight:600">✕</button></div>
+    <div class="modal-body"><p style="margin:0;color:#374151;font-size:14px">确定要退出当前登录账号吗？</p></div>
+    <div class="modal-footer"><button class="btn" data-close-modal>取消</button><button class="btn btn-primary" style="background:#ef4444;border-color:#ef4444">确定退出</button></div>
+  </div>
+</div>
+
+<div class="body">
+<nav class="sidebar"><a href="index.html" data-page="home" class="">首页</a><details open><summary>设备<span class="arrow">▶</span></summary><a href="device-overview.html" data-page="device-overview" class="">设备总览</a><a href="device-cookers.html" data-page="device-cookers" class="">炒菜机管理</a><a href="device-others.html" data-page="device-others" class="">其他设备</a><a href="device-logs.html" data-page="device-logs" class="">设备日志</a><a href="device-auth.html" data-page="device-auth" class="">运行授权</a></details><details open><summary>菜谱管理<span class="arrow">▶</span></summary><a href="recipe-official.html" data-page="recipe-official" class="">官方菜谱</a><a href="recipe-my.html" data-page="recipe-my" class="">我的菜谱</a><a href="recipe-org.html" data-page="recipe-org" class="">组织菜谱</a><a href="recipe-permission-log.html" data-page="recipe-permission-log" class="">权限变更记录</a><a href="recipe-merchant-groups.html" data-page="recipe-merchant-groups" class="">商家菜谱分组</a><a href="recipe-store-groups.html" data-page="recipe-store-groups" class="">门店菜谱分组</a><a href="recipe-device.html" data-page="recipe-device" class="">设备菜谱</a><a href="recipe-ingredients.html" data-page="recipe-ingredients" class="">商家食材库</a><a href="recipe-auth.html" data-page="recipe-auth" class="">菜谱运行授权</a></details><details open><summary>数据<span class="arrow">▶</span></summary><div class="nav-flyout-trigger active" data-flyout-target="report-flyout"><a href="data-kitchen-report.html" data-page="data-kitchen-report" class="flyout-label">后厨报表</a><span class="flyout-toggle">▶</span><div class="submenu-flyout" id="report-flyout"><div class="flyout-group-label">烹饪类</div><a href="report-store-cooking.html" data-page="report-store-cooking" class="">门店烹饪报表</a><a href="report-recipe-cooking.html" data-page="report-recipe-cooking" class="">菜谱烹饪报表</a><a href="report-device-cooking.html" data-page="report-device-cooking" class="active">设备烹饪报表</a><a href="report-ingredient.html" data-page="report-ingredient" class="">用料消耗报表</a><a href="report-time.html" data-page="report-time" class="">时段烹饪报表</a><div class="flyout-group-label">维保类</div><a href="report-seasoning-maint.html" data-page="report-seasoning-maint" class="">调料保养报表</a><a href="report-pot-maint.html" data-page="report-pot-maint" class="">锅保养报表</a></div></div><a href="data-bigscreen.html" data-page="data-bigscreen" class="">数字大屏</a></details><details open><summary>系统<span class="arrow">▶</span></summary><a href="system-org.html" data-page="system-org" class="">组织管理</a><a href="system-store.html" data-page="system-store" class="">门店管理</a><a href="system-account.html" data-page="system-account" class="">账号管理</a><a href="system-role.html" data-page="system-role" class="">角色权限</a><a href="system-settings.html" data-page="system-settings" class="">系统设置</a></details></nav>
+<main class="main">
+<div class="page-title">设备烹饪报表</div>
+<div class="report-layout"><div class="org-panel">
+  <div class="org-panel-header">选择统计组织范围</div>
+  <div class="org-panel-hint">组织后面的数字代表当前绑定设备数</div>
+  <input class="org-panel-search" type="text" placeholder="输入名称或ID搜索">
+  <div class="org-tree"><div class="org-tree-item"><input type="checkbox"><span class="icon">▾</span><span>小食店1232</span><span class="count">(183)</span></div><div class="org-tree-item"><span class="indent"></span><input type="checkbox"><span class="icon">▾</span><span>广东大区</span><span class="count">(21)</span></div><div class="org-tree-item"><span class="indent"></span><span class="indent"></span><input type="checkbox"><span class="icon">▾</span><span>大四区</span><span class="count">(3)</span></div><div class="org-tree-item"><span class="indent"></span><span class="indent"></span><input type="checkbox"><span class="icon">▾</span><span>测试一大区</span><span class="count">(0)</span></div><div class="org-tree-item"><span class="indent"></span><span class="indent"></span><input type="checkbox"><span class="icon">▾</span><span>大一区</span><span class="count">(100)</span></div><div class="org-tree-item"><span class="indent"></span><span class="indent"></span><input type="checkbox"><span class="icon">▾</span><span>大三区</span><span class="count">(3)</span></div><div class="org-tree-item"><span class="indent"></span><span class="indent"></span><input type="checkbox"><span class="icon">▾</span><span>又来一个新组织001</span><span class="count">(0)</span></div><div class="org-tree-item"><span class="indent"></span><input type="checkbox"><span class="icon">▾</span><span>123</span><span class="count">(1)</span></div><div class="org-tree-item"><span class="indent"></span><input type="checkbox"><span class="icon">▾</span><span>打样房加拉链</span><span class="count">(0)</span></div><div class="org-tree-item"><span class="indent"></span><input type="checkbox"><span class="icon">▾</span><span>02</span><span class="count">(0)</span></div><div class="org-tree-item"><span class="indent"></span><input type="checkbox"><span class="icon">▾</span><span>04</span><span class="count">(0)</span></div><div class="org-tree-item"><span class="indent"></span><input type="checkbox"><span class="icon">▾</span><span>05</span><span class="count">(0)</span></div><div class="org-tree-item"><span class="indent"></span><input type="checkbox"><span class="icon">▾</span><span>06</span><span class="count">(0)</span></div><div class="org-tree-item"><span class="indent"></span><input type="checkbox"><span class="icon">▾</span><span>07</span><span class="count">(0)</span></div><div class="org-tree-item"><span class="indent"></span><input type="checkbox"><span class="icon">▾</span><span>08</span><span class="count">(0)</span></div><div class="org-tree-item"><span class="indent"></span><input type="checkbox"><span class="icon">▾</span><span>09</span><span class="count">(0)</span></div><div class="org-tree-item"><span class="indent"></span><input type="checkbox"><span class="icon">▾</span><span>0101</span><span class="count">(0)</span></div><div class="org-tree-item"><span class="indent"></span><input type="checkbox"><span class="icon">▾</span><span>0102</span><span class="count">(0)</span></div><div class="org-tree-item"><span class="indent"></span><input type="checkbox"><span class="icon">▾</span><span>0103</span><span class="count">(0)</span></div><div class="org-tree-item"><span class="indent"></span><input type="checkbox"><span class="icon">▾</span><span>0104</span><span class="count">(0)</span></div><div class="org-tree-item"><span class="indent"></span><input type="checkbox"><span class="icon">▾</span><span>0105</span><span class="count">(0)</span></div><div class="org-tree-item"><span class="indent"></span><input type="checkbox"><span class="icon">▾</span><span>0106</span><span class="count">(0)</span></div><div class="org-tree-item"><span class="indent"></span><input type="checkbox"><span class="icon">▾</span><span>0107</span><span class="count">(0)</span></div><div class="org-tree-item"><span class="indent"></span><input type="checkbox"><span class="icon">▾</span><span>0109</span><span class="count">(0)</span></div></div>
+</div><div class="report-main">
+<div class="breadcrumb"><span>数据</span><span>/</span><span>后厨报表</span><span>/</span><span>烹饪类</span><span>/</span><span>设备烹饪报表</span></div>
+<div class="report-card">
+  <div class="filter-bar" style="align-items:flex-end;flex-wrap:wrap">
+    <div class="filter-item"><label>组织与门店</label><select><option>全部</option><option>老板电器上海店</option><option>老板电器杭州店</option><option>小食店1232</option></select></div>
+    <div class="filter-item"><label>设备别名</label><input type="text" placeholder="请输入" size="16"></div>
+    <div class="filter-item"><label>设备CGID(精确)</label><input type="text" placeholder="请输入" size="18"></div>
+    <div class="filter-item"><label>起止日期</label><select><option selected>按月</option><option>按日</option><option>按周</option><option>按年</option></select></div>
+    <div class="filter-item"><input type="text" value="2026-08" size="10"> 至 <input type="text" value="2026-08" size="10"></div>
+    <div class="filter-item"><label>产品类型</label><select><option>全部</option><option>G3标准板</option><option>RT系列</option></select></div>
+    <div class="filter-item"><label>产品名称</label><select><option>全部</option><option>G3标准板2.1</option><option>G3标准板2.5</option><option>RT3标准版</option></select></div>
+    <div class="filter-actions" style="margin-left:auto;display:flex;gap:8px;align-items:flex-end;padding-bottom:1px">
+      <button class="btn">重置</button>
+      <button class="btn btn-primary">查询</button>
+      <button class="btn">导出</button>
+      <button class="btn">展开 ▼</button>
+    </div>
+  </div>
+  <div class="table-wrap"><table><thead><tr><th>产品名称</th><th>绑定门店时间</th><th>烹饪次数</th><th>有效烹饪数</th><th>异常烹饪数</th><th>日均烹饪数</th><th>烹饪菜谱</th><th>烹饪天数</th><th>烹饪时长</th><th>有效烹饪时长</th><th>操作</th></tr></thead><tbody><tr><td>G3标准板2.5</td><td>2025-07-09 04:48</td><td><span style="color:#2563eb">0</span></td><td><span style="color:#2563eb">0(0%)</span></td><td><span style="color:#2563eb">0(0%)</span></td><td>0</td><td>0</td><td>0</td><td>0小时</td><td>0小时</td><td><div class='ops'><a class="text-link" href="report-device-energy.html">能耗消耗</a><br><a class="text-link" href="report-device-cooking-records.html">查看明细</a></div></td></tr><tr><td>RT3标准版</td><td>2025-07-09 04:48</td><td><span style="color:#2563eb">0</span></td><td><span style="color:#2563eb">0(0%)</span></td><td><span style="color:#2563eb">0(0%)</span></td><td>0</td><td>0</td><td>0</td><td>0小时</td><td>0小时</td><td><div class='ops'><a class="text-link" href="report-device-energy.html">能耗消耗</a><br><a class="text-link" href="report-device-cooking-records.html">查看明细</a></div></td></tr><tr><td>G3标准板2.5</td><td>2025-07-09 04:48</td><td><span style="color:#2563eb">0</span></td><td><span style="color:#2563eb">0(0%)</span></td><td><span style="color:#2563eb">0(0%)</span></td><td>0</td><td>0</td><td>0</td><td>0小时</td><td>0小时</td><td><div class='ops'><a class="text-link" href="report-device-energy.html">能耗消耗</a><br><a class="text-link" href="report-device-cooking-records.html">查看明细</a></div></td></tr><tr><td>G3标准板2.1</td><td>2025-07-09 04:48</td><td><span style="color:#2563eb">0</span></td><td><span style="color:#2563eb">0(0%)</span></td><td><span style="color:#2563eb">0(0%)</span></td><td>0</td><td>0</td><td>0</td><td>0小时</td><td>0小时</td><td><div class='ops'><a class="text-link" href="report-device-energy.html">能耗消耗</a><br><a class="text-link" href="report-device-cooking-records.html">查看明细</a></div></td></tr><tr><td>RT3标准版</td><td>2025-07-09 04:48</td><td><span style="color:#2563eb">0</span></td><td><span style="color:#2563eb">0(0%)</span></td><td><span style="color:#2563eb">0(0%)</span></td><td>0</td><td>0</td><td>0</td><td>0小时</td><td>0小时</td><td><div class='ops'><a class="text-link" href="report-device-energy.html">能耗消耗</a><br><a class="text-link" href="report-device-cooking-records.html">查看明细</a></div></td></tr><tr><td>G3标准板2.5</td><td>2025-07-09 04:48</td><td><span style="color:#2563eb">0</span></td><td><span style="color:#2563eb">0(0%)</span></td><td><span style="color:#2563eb">0(0%)</span></td><td>0</td><td>0</td><td>0</td><td>0小时</td><td>0小时</td><td><div class='ops'><a class="text-link" href="report-device-energy.html">能耗消耗</a><br><a class="text-link" href="report-device-cooking-records.html">查看明细</a></div></td></tr></tbody></table></div>
+  <div class="pagination-bar"><span>共 182 条记录 第 1 / 5 页</span><div class="pages"><button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">3</button><button class="page-btn">4</button><button class="page-btn">5</button><button class="page-btn">&gt;</button></div><span>10 条/页</span></div>
+</div></div></div>
+</main>
+</div>
+</div>
+<script src="common.js"></script>
+</body>
+</html>
